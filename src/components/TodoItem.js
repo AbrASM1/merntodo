@@ -11,8 +11,8 @@ const TodoItemContainer = styled.div`
   padding: 16px;
   border-radius: 25px 10px;
   background-color: ${props => {
-    if (props.priority === 'important') return '#ffeb3b';// priority changes
-    if (props.priority === 'critical') return '#ff4081';
+    if (props.priority === 'important') return '#7C93C3';// priority changes
+    if (props.priority === 'critical') return '#A25772';
     return '#788995';
   }};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

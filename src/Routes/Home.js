@@ -75,7 +75,7 @@ function Home() {
         <br />
       </Container>
     ) : (
-      <Heading>Wellcome {credentials.username}</Heading>
+      <Heading>Welcome {credentials.username}</Heading>
     )}
       {credentials.username && <Todos/>}
     </>
