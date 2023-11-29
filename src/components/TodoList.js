@@ -8,7 +8,7 @@ const TodoListContainer = styled.div`
   margin-top: 20px;
 `;
 
-function TodoList({ todos, onToggle, onDelete, onUpdate }) {
+function TodoList({ todos, onToggle, onDelete}) {
 
 
   return (
@@ -20,7 +20,6 @@ function TodoList({ todos, onToggle, onDelete, onUpdate }) {
           onToggle={onToggle}
           onDelete={onDelete}
           todoId={todo._id}
-          onUpdate={onUpdate}
         />
       ))}
     </TodoListContainer>
