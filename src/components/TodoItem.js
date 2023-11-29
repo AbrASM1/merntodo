@@ -118,6 +118,7 @@ const Deadline = styled.div`
 const StyledInput = styled.input`
  border: none;
  background-color: transparent;
+ width:400px;
 `;
 
 function TodoItem({ todo, onToggle, onDelete, todoId, onUpdate }) {
