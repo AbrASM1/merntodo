@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 const DarkMode = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
     const toggleTheme = () => {
         setIsDarkMode(prevMode => !prevMode);
 
@@ -21,7 +21,7 @@ const DarkMode = () => {
                 transition: 'background-color 0.3s,color 0.3s',
             }}
         >
-            {isDarkMode ? 'SWITCH TO DARK MODE' : 'SWITCH TO WHITE MODE'}
+            {isDarkMode ? 'SWITCH TO DARK MODE' : 'SWITCH TO LIGHT MODE'}
         </button>
     );
 };
