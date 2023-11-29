@@ -1,4 +1,5 @@
 import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 //Implementation du drag and drop context
 
@@ -11,10 +12,10 @@ const TodoItemContainer = styled.div`
   padding: 16px;
   border-radius: 25px 10px;
   background-color: ${props => {
-        if (props.priority === 'important') return '#7C93C3';// priority changes
-        if (props.priority === 'critical') return '#A25772';
-        return '#788995';
-    }};
+    if (props.priority === 'important') return '#ffeb3b';// priority changes
+    if (props.priority === 'critical') return '#ff4081';
+    return '#788995';
+  }};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   opacity: ${props => props.checked ? '0.5' : '1'};
@@ -86,6 +87,23 @@ const DeleteButton = styled.button`
     background-color:white;
   }
 `;
+const ModifyButton = styled.button`
+  background-color: #1b4ad8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 8px 16px;
+  cursor: pointer;
+  position:absolute;
+  top: 16px;
+  right:100px;
+  &:hover,
+  &:active {
+    color: black;
+    background-color:white;
+  }
+`;
 
 const Description = styled.div`
   margin-top: 4px;
@@ -98,34 +116,53 @@ const Deadline = styled.div`
   font-size: 14px;
   margin-top: 8px;
 `;
+const StyledInput = styled.input`
+ border: none;
+ background-color: transparent;
+`;
 
-function TodoItem({ todo, onToggle, onDelete, todoId }) {
-    
+function TodoItem({ todo, onToggle, onDelete, todoId, onUpdate }) {
 
-    return (
-        <TodoItemContainer
-            checked={todo.checked}
-            priority={todo.priority}
-        >
-            <Checkbox>
-                <input
-                    type="checkbox"
-                    checked={todo.checked}
-                    onChange={() => onToggle(todoId)}
-            />
-                <span className="checkmark"></span>
-            </Checkbox>
-            <div>
-                <TodoText checked={todo.checked}>
-                    {todo.text}
-                </TodoText>
+  const [description, setDescription] = useState(todo.description);
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    onUpdate(todoId, todo.text, e.target.value, todo.deadline);
+  };
+  const [text, setText] = useState(todo.text);
+  const handletextChange = (e) => {
+    setText(e.target.value);
+    onUpdate(todoId, e.target.value, todo.description, todo.deadline);
+  };
+  const [deadline, setDeadline] = useState(todo.deadline);
+  const handleDeadlineChange = (e) => {
+    setDeadline(e.target.value);
+    onUpdate(todoId, todo.text, todo.description, e.target.value);
+  };
+  return (
+    <TodoItemContainer
+      checked={todo.checked}
+      priority={todo.priority}
+    >
+      <Checkbox>
+        <input
+          type="checkbox"
+          checked={todo.checked}
+          onChange={() => onToggle(todoId)}
+        />
+        <span className="checkmark"></span>
+      </Checkbox>
+      <div>
+        <TodoText checked={todo.checked}>
+          <StyledInput value={text} onChange={handletextChange} />
+        </TodoText>
 
-                {todo.description && <Description>{todo.description}</Description>}
-                {todo.deadline && <Deadline>Deadline: {todo.deadline}</Deadline>}
-            </div>
-            <DeleteButton onClick={() => onDelete(todoId)}>Delete</DeleteButton>
-        </TodoItemContainer>
-    );
+        {todo.description && <Description><StyledInput value={description} onChange={handleDescriptionChange} /></Description>}
+        {todo.deadline && <Deadline>Deadline: <StyledInput value={deadline} onChange={handleDeadlineChange} /></Deadline>}
+      </div>
+      <DeleteButton onClick={() => onDelete(todoId)}>Delete</DeleteButton>
+
+    </TodoItemContainer>
+  );
 }// les deux condition sont pour les todo vide
 
 export default TodoItem;
