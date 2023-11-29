@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 //Implementation du drag and drop context
