@@ -11,14 +11,12 @@ const TodoItemContainer = styled.div`
   padding: 16px;
   border-radius: 25px 10px;
   background-color: ${props => {
-    if (props.priority === 'important') return '#7C93C3';// priority changes
-    if (props.priority === 'critical') return '#A25772';
-    return '#788995';
+    return props.priority;
   }};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   opacity: ${props => props.checked ? '0.5' : '1'};
-  cursor: move;
+  cursor: pointer;
   border: 2px solid transparent;
 `;
 

@@ -3,7 +3,6 @@ import AddTodoForm from './AddTodoForm';
 import styled from 'styled-components';
 import TodoList from './TodoList';
 import { CredentialsContext } from '../App';
-import DarkMode from './DarkMode';
 //import { handleErrors } from '../Routes/Register';
 const Container = styled.div`
   max-width: 600px;
@@ -117,7 +116,6 @@ function Todos() {
 
 
     <Container>
-      <DarkMode />
       <AddTodoForm onAddTodo={handleAddTodo}
         LePasseur={LePasseur}
       />

@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { Lightbulb, LightbulbOff } from 'lucide-react';
+
 const DarkMode = () => {
     const [isDarkMode, setIsDarkMode] = useState(true);
     const toggleTheme = () => {
@@ -10,8 +12,7 @@ const DarkMode = () => {
     return (
         <button onClick={toggleTheme}
             style={{
-                padding: '10px 20px',
-                fontSize: '16px',
+                marginbottom: "10px",
                 fontWeight: 'bold',
                 color: isDarkMode ? 'white' : 'black',
                 backgroundColor: isDarkMode ? '#333' : '#ddd',
@@ -21,7 +22,7 @@ const DarkMode = () => {
                 transition: 'background-color 0.3s,color 0.3s',
             }}
         >
-            {isDarkMode ? 'SWITCH TO DARK MODE' : 'SWITCH TO LIGHT MODE'}
+            {isDarkMode ? <Lightbulb /> : <LightbulbOff />}
         </button>
     );
 };

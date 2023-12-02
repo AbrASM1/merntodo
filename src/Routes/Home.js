@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Image1 from '../icons/image1.png';
 import { CredentialsContext } from '../App';
 import Todos from '../components/Todos';
+import Navbar from '../components/NavBar';
 
 const Container = styled.div`
   display: flex;
@@ -53,31 +54,35 @@ const FancyButton = styled.button`
 
 const Image = styled.img`
   max-width: 736px;
-  height: 552px;
+  height: 352px;
   margin-bottom: 20px;
 `;
 function Home() {
-  
-  const [credentials]= useContext(CredentialsContext);
-  
+
+  const [credentials] = useContext(CredentialsContext);
+
   return (
     <>
-    {!credentials.username ? (
-      <Container>
-        <br />
-        <Image src={Image1} alt="Illustration" />
-        <StyledLink to="/register">
-          <FancyButton>Register</FancyButton>
-        </StyledLink>
-        <StyledLink to="/login">
-          <FancyButton>Login</FancyButton>
-        </StyledLink>
-        <br />
-      </Container>
-    ) : (
-      <Heading>Welcome {credentials.username}</Heading>
-    )}
-      {credentials.username && <Todos/>}
+
+      <Navbar />
+      {!credentials.username ? (
+        <Container>
+
+          <br />
+
+          <Image src={Image1} alt="Illustration" />
+          <StyledLink to="/register">
+            <FancyButton>Register</FancyButton>
+          </StyledLink>
+          <StyledLink to="/login">
+            <FancyButton>Login</FancyButton>
+          </StyledLink>
+          <br />
+        </Container>
+      ) : (
+        <Heading>Welcome {credentials.username}</Heading>
+      )}
+      {credentials.username && <Todos />}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 // css
 const Form = styled.form`
@@ -7,6 +7,7 @@ const Form = styled.form`
   margin-bottom: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
+  margin:15px;
 `;
 
 const Input = styled.input`
@@ -19,7 +20,7 @@ const Input = styled.input`
   box-shadow: none;
 `;
 
-const PrioritySelect = styled.select`
+const PrioritySelect = styled.input`
   flex-grow: 1;
   padding: 8px;
   font-size: 16px;
@@ -66,32 +67,33 @@ const DeadlineInput = styled.input`
 `;
 
 
-function AddTodoForm({ onAddTodo,LePasseur }) {
-    //j'ai utiliser useState pour les changemment d'etats
+function AddTodoForm({ onAddTodo, LePasseur }) {
+  //j'ai utiliser useState pour les changemment d'etats
   const [inputText, setInputText] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [priority, setPriority] = useState('normal');
+  const [priority, setPriority] = useState('#fafafa');
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.trim() !== '') {
       onAddTodo({
-        Todos:{
+        Todos: {
+          text: inputText,
+          description,
+          deadline,
+          priority,
+          checked: false,
+        }
+      });
+      // les defaults
+      const newTodos = {
         text: inputText,
         description,
         deadline,
         priority,
-        checked: false,} 
-      });
-      // les defaults
-      const newTodos={
-        text:inputText,
-        description,
-        deadline,
-        priority,
-        checked: false, 
+        checked: false,
 
       };
       setInputText('');
@@ -122,13 +124,9 @@ function AddTodoForm({ onAddTodo,LePasseur }) {
         onChange={(e) => setDeadline(e.target.value)}
       />
       <PrioritySelect
+        type='color'
         value={priority}
-        onChange={(e) => setPriority(e.target.value)}
-      >
-        <option value="normal">Normal</option>
-        <option value="important">Important</option>
-        <option value="critical">Critical</option>
-      </PrioritySelect>
+        onChange={(e) => setPriority(e.target.value)} />
       <AddButton type="submit">Add</AddButton>
     </Form>
   );
