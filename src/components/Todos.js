@@ -3,6 +3,8 @@ import AddTodoForm from './AddTodoForm';
 import styled from 'styled-components';
 import TodoList from './TodoList';
 import { CredentialsContext } from '../App';
+import ProgressBar from './ProgressBar';
+import { log } from 'mathjs';
 //import { handleErrors } from '../Routes/Register';
 const Container = styled.div`
   max-width: 600px;
@@ -108,7 +110,21 @@ function Todos() {
     setTodos(UpdatedTodo);
     Updater(todoItem);
   };
-
+  const y = () => {
+    let i = 0;
+    let z = 0;
+  
+    for (let y = 0; y < Todos.length; y++) {
+      if (Todos[y].Todos.checked === true) {
+        i++;
+      }
+      z++;
+    }
+  
+    return (i / z) * 100;
+  };
+  
+  const percentage =y()
   useEffect(() => { Fetcher() }, []);
 
 
@@ -119,6 +135,7 @@ function Todos() {
       <AddTodoForm onAddTodo={handleAddTodo}
         LePasseur={LePasseur}
       />
+      <ProgressBar percentage={percentage}/>
       <TodoList
         todos={Todos}
         onToggle={handleToggle}

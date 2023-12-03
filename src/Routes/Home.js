@@ -14,14 +14,7 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Heading = styled.h1`
-  font-size: 2em;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -65,7 +58,7 @@ function Home() {
     <>
 
       <Navbar />
-      {!credentials.username ? (
+      {!credentials.username && (
         <Container>
 
           <br />
@@ -79,8 +72,6 @@ function Home() {
           </StyledLink>
           <br />
         </Container>
-      ) : (
-        <Heading>Welcome {credentials.username}</Heading>
       )}
       {credentials.username && <Todos />}
     </>

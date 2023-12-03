@@ -7,7 +7,7 @@ const Form = styled.form`
   margin-bottom: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  margin:15px;
+  margin:10%;
 `;
 
 const Input = styled.input`
@@ -65,7 +65,36 @@ const DeadlineInput = styled.input`
   outline: none;
   box-shadow: none;
 `;
+const ColorInput = styled.input`
+appearance: none;
+width: 50px;
+height: 30px;
+padding: 5px; /* Added padding */
+margin-right: 10px; /* Added margin-right for spacing */
+border: none;
+border-radius: 5px;
+outline: none;
+cursor: pointer;
+background: linear-gradient(to right, #ff7e5f, #feb47b);
+transition: background 0.3s ease-in-out;
+margin-left:25%;
 
+&::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+&::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}
+
+&:hover {
+  background: linear-gradient(to right, #8e44ad, #3498db);
+  }
+`;
+const StyledDiv=styled.div`
+    margin:10px;
+`;
 
 function AddTodoForm({ onAddTodo, LePasseur }) {
   //j'ai utiliser useState pour les changemment d'etats
@@ -123,10 +152,13 @@ function AddTodoForm({ onAddTodo, LePasseur }) {
         value={deadline}
         onChange={(e) => setDeadline(e.target.value)}
       />
-      <PrioritySelect
+      <StyledDiv>
+        <span >Choose color:           </span><br/>
+      <ColorInput
         type='color'
         value={priority}
         onChange={(e) => setPriority(e.target.value)} />
+      </StyledDiv>
       <AddButton type="submit">Add</AddButton>
     </Form>
   );

@@ -20,6 +20,7 @@ const DarkMode = () => {
                 borderRadius: '4px',
                 cursor: 'pointer',
                 transition: 'background-color 0.3s,color 0.3s',
+                height:'70%',
             }}
         >
             {isDarkMode ? <Lightbulb /> : <LightbulbOff />}
