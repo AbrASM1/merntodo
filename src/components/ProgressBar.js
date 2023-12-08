@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Navbar from './NavBar';
 
 const ProgressBarContainer = styled.div`
   width: 80%;
@@ -19,8 +20,10 @@ const Progress = styled.div`
 
 const Comment = styled.p`
   text-align: center;
-  margin-top: 10px;
-  color: #333;
+  margin-top: 2px;
+  margin-bottom: 50px;
+  color: #3498db;
+  font-weight: bold;
 `;
 
 const ProgressBar = ({ percentage }) => {
@@ -32,7 +35,7 @@ const ProgressBar = ({ percentage }) => {
     comment = 'Making progress, keep it up!';
   } else if (percentage < 100) {
     comment = 'You are doing great!';
-  } else if(percentage==100){
+  } else if (percentage == 100) {
     comment = 'Congratulations! You have completed the task!';
   }
 
@@ -48,7 +51,7 @@ const ProgressBar = ({ percentage }) => {
       )}
     </div>
   );
-  
+
 };
 
 export default ProgressBar;

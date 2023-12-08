@@ -18,6 +18,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   box-shadow: none;
+  border-radius:4px ;
 `;
 
 const PrioritySelect = styled.input`
@@ -54,6 +55,7 @@ const DescriptionInput = styled.input`
   border: none;
   outline: none;
   box-shadow: none;
+  border-radius:4px ;
 `;
 
 const DeadlineInput = styled.input`
@@ -64,6 +66,7 @@ const DeadlineInput = styled.input`
   border: none;
   outline: none;
   box-shadow: none;
+  border-radius:4px ;
 `;
 const ColorInput = styled.input`
 appearance: none;
@@ -92,7 +95,7 @@ margin-left:25%;
   background: linear-gradient(to right, #8e44ad, #3498db);
   }
 `;
-const StyledDiv=styled.div`
+const StyledDiv = styled.div`
     margin:10px;
 `;
 
@@ -153,11 +156,11 @@ function AddTodoForm({ onAddTodo, LePasseur }) {
         onChange={(e) => setDeadline(e.target.value)}
       />
       <StyledDiv>
-        <span >Choose color:           </span><br/>
-      <ColorInput
-        type='color'
-        value={priority}
-        onChange={(e) => setPriority(e.target.value)} />
+        <span >Choose color:           </span><br />
+        <ColorInput
+          type='color'
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)} />
       </StyledDiv>
       <AddButton type="submit">Add</AddButton>
     </Form>

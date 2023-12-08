@@ -88,12 +88,12 @@ function Navbar() {
   return (
     <NavbarContainer>
       <NavbarBrand>
-        <StyledLink to="/">ASKOUT 3LINA</StyledLink>
+        <StyledLink to="/">Todo List</StyledLink>
       </NavbarBrand>
 
-      {(showGreeting && credentials.username) &&(
+      {(showGreeting && credentials.username) && (
         <GreetingContainer>
-          <p style={{fontSize: '25px'}}>Hello, {credentials.username}!</p>
+          <p style={{ fontSize: '25px' }}>Hello, {credentials.username}!</p>
         </GreetingContainer>
       )}
       <NavbarLinks>
