@@ -27,6 +27,7 @@ const todosSchema = new mongoose.Schema({
         description: String,
         priority: String,
         deadline: Date,
+        time: String,
 
     }
 
@@ -287,7 +288,7 @@ db.on("error", function (error) {
 
 db.once("open", function () {
     app.listen(port, () => {
-        console.log("testing");
+        console.log("Started");
     });
 });
 //console.log('test4')

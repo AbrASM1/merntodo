@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import TodoList from './TodoList';
 import { CredentialsContext } from '../App';
 import ProgressBar from './ProgressBar';
-import { log } from 'mathjs';
-//import { handleErrors } from '../Routes/Register';
 const Container = styled.div`
   max-width: 600px;
   margin: 0 auto;
@@ -101,12 +99,13 @@ function Todos() {
     setTodos(UpdatedTodo);
     LeChecker(todoItem);
   };
-  const handleUpdate = (id, text, description, deadline) => {
+  const handleUpdate = (id, text, description, deadline,time) => {
     const UpdatedTodo = [...Todos];
     const todoItem = UpdatedTodo.find((todo) => todo._id === id);
     todoItem.Todos.text = text;
     todoItem.Todos.description = description;
     todoItem.Todos.deadline = deadline;
+    todoItem.Todos.time=time;
     setTodos(UpdatedTodo);
     Updater(todoItem);
   };

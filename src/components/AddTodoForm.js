@@ -15,21 +15,11 @@ const Input = styled.input`
   padding: 8px;
   font-size: 16px;
   margin-bottom: 8px;
-  border: none;
+  border-color:lightgray;
   outline: none;
-  box-shadow: none;
-  border-radius:4px ;
+  border-radius: 4px;
 `;
 
-const PrioritySelect = styled.input`
-  flex-grow: 1;
-  padding: 8px;
-  font-size: 16px;
-  margin-bottom: 8px;
-  border: none;
-  outline: none;
-  box-shadow: none;
-`;
 
 const AddButton = styled.button`
   background-color: #539adb/* #4caf50 */;
@@ -52,11 +42,14 @@ const DescriptionInput = styled.input`
   padding: 8px;
   font-size: 16px;
   margin-bottom: 8px;
-  border: none;
+  /* Remove border and box-shadow styles */
   outline: none;
-  box-shadow: none;
-  border-radius:4px ;
+  
+  border-color:lightgray;
+  border-radius: 4px;
 `;
+
+
 
 const DeadlineInput = styled.input`
   padding: 12px;
@@ -70,7 +63,7 @@ const DeadlineInput = styled.input`
 `;
 const ColorInput = styled.input`
 appearance: none;
-width: 50px;
+width: 50%;
 height: 30px;
 padding: 5px; /* Added padding */
 margin-right: 10px; /* Added margin-right for spacing */
@@ -98,12 +91,31 @@ margin-left:25%;
 const StyledDiv = styled.div`
     margin:10px;
 `;
+const StyledInput = styled.input`
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
 
+  &:focus {
+    border-color: #3498db;
+  }
+`;
+const OptionalLabel = styled.label`
+  font-size: 14px;
+  color: #888;
+  margin-left: auto;
+  display: block;
+  text-align: right;
+`;
 function AddTodoForm({ onAddTodo, LePasseur }) {
   //j'ai utiliser useState pour les changemment d'etats
   const [inputText, setInputText] = useState('');
   const [description, setDescription] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [time,setTime]=useState('');
   const [priority, setPriority] = useState('#fafafa');
 
 
@@ -117,6 +129,7 @@ function AddTodoForm({ onAddTodo, LePasseur }) {
           deadline,
           priority,
           checked: false,
+          time:time,
         }
       });
       // les defaults
@@ -126,18 +139,23 @@ function AddTodoForm({ onAddTodo, LePasseur }) {
         deadline,
         priority,
         checked: false,
+        time:time,
 
       };
       setInputText('');
       setDescription('');
       setDeadline('');
       setPriority('normal');
+      setTime('');
       LePasseur(newTodos);
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      <OptionalLabel>
+      (*) Stands for "Optional"
+    </OptionalLabel>
       <Input
         type="text"
         value={inputText}
@@ -148,15 +166,25 @@ function AddTodoForm({ onAddTodo, LePasseur }) {
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
+        placeholder="Description *"
       />
+      
+      <label style={{marginLeft:'2%'}}>Select a date: *</label>
       <DeadlineInput
         type="date"
         value={deadline}
         onChange={(e) => setDeadline(e.target.value)}
       />
+      <label style={{marginLeft:'2%'}}>Select a time: *</label>
+      <StyledInput
+        type="time"
+        id="timeInput"
+        name="timeInput"
+        value={time}
+        onChange={(e)=>setTime(e.target.value)}
+      />
       <StyledDiv>
-        <span >Choose color:           </span><br />
+        <label style={{marginLeft:'1%'}} >Choose color: *          </label>
         <ColorInput
           type='color'
           value={priority}
