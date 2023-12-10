@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import { CredentialsContext } from '../App';
 import { LogOut } from 'lucide-react';
 import DarkMode from './DarkMode';
-
 const NavbarContainer = styled.div`
-  background-color: #495057;
+  background-color: #222d5a;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -37,6 +36,10 @@ const NavbarLink = styled.li`
   margin-left: 1rem;
   color: #fafafa;
   text-decoration: none;
+
+  &:first-child {
+    margin-left: 0;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -44,6 +47,7 @@ const StyledLink = styled(Link)`
   color: #fafafa;
   font-size: 1.2em;
   transition: color 0.3s;
+  margin-right: 20px; 
 
   &:hover {
     color: #000;
@@ -73,10 +77,15 @@ const GreetingContainer = styled.div`
 
 `;
 
-function Navbar() {
-  const [credentials] = useContext(CredentialsContext);
-  const [showGreeting, setShowGreeting] = useState(true);
 
+
+function Navbar() {
+  const [credentials,setCredentials] = useContext(CredentialsContext);
+  const [showGreeting, setShowGreeting] = useState(true);
+  function logout (){
+    localStorage.removeItem("jwtToken");
+    setCredentials('');
+  }
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowGreeting(false);
@@ -93,14 +102,17 @@ function Navbar() {
 
       {(showGreeting && credentials.username) && (
         <GreetingContainer>
-          <p style={{ fontSize: '25px' }}>Hello, {credentials.username}!</p>
+          <p style={{ fontSize: '25px', marginLeft:'200px' }}>Hello, {credentials.username}!</p>
         </GreetingContainer>
       )}
       <NavbarLinks>
-        <DarkMode />
+      {credentials.username &&<StyledLink to="/help">
+              Help             
+            </StyledLink>
+      }  <DarkMode />
         {credentials.username && (
           <NavbarLink>
-            <StyledLink to="/login">
+            <StyledLink to="/" onClick={logout}>
               <LogOut />
             </StyledLink>
           </NavbarLink>

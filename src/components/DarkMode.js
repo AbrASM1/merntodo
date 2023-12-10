@@ -15,7 +15,7 @@ const DarkMode = () => {
                 marginbottom: "10px",
                 fontWeight: 'bold',
                 color: isDarkMode ? 'white' : 'black',
-                backgroundColor: isDarkMode ? '#333' : '#ddd',
+                backgroundColor: "transparent",
                 border: 'none',
                 borderRadius: '4px',
                 cursor: 'pointer',

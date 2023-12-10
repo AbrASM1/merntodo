@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 const port = 4000;
 const mongoose = require("mongoose");
-
+const jwt = require("jsonwebtoken");
 mongoose.connect('mongodb://127.0.0.1:27017/todo')
     .then(() => {
         console.log('Connected to database');
@@ -50,11 +50,17 @@ app.post("/register", async (req, res) => {
         return;
     }
     await User.create({ username, password });
-    res.json({
-        message: "Success",
-        //username,
-        //password,
-    });
+    
+        const secretKey = 'test'; // Replace with your actual secret key
+        const payload = {
+          username: username,
+          password: password,
+        };
+      
+        // Generate a JWT
+        const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); // Set an expiration time
+        console.log('Generated Token:', token);
+    res.json(token);
 });
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
@@ -66,11 +72,17 @@ app.post("/login", async (req, res) => {
         });
         return;
     }
-    res.json({
-        message: "Success",
-        //username,
-        //password,
-    });
+    const secretKey = 'test'; // Replace with your actual secret key
+    const payload = {
+      username: username,
+      password: password,
+    };
+  
+    // Generate a JWT
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); // Set an expiration time
+    console.log('Generated Token:', token);
+    res.json(token);
+    
 });
 
 app.post("/todos", async (req, res) => {

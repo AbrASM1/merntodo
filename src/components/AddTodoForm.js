@@ -9,17 +9,52 @@ const Form = styled.form`
   padding: 16px;
   margin:10%;
 `;
-
 const Input = styled.input`
   flex-grow: 1;
   padding: 8px;
   font-size: 16px;
   margin-bottom: 8px;
-  border-color:lightgray;
+  border: 1px solid lightgray;
   outline: none;
   border-radius: 4px;
+  background-color: #f5f5f5; /* Light gray background */
 `;
 
+const DescriptionInput = styled.input`
+  flex-grow: 1;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  outline: none;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background-color: #f5f5f5; /* Light gray background */
+`;
+
+const DeadlineInput = styled.input`
+  padding: 12px;
+  font-size: 16px;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  border: 1px solid lightgray;
+  outline: none;
+  border-radius: 4px;
+  background-color: #f5f5f5; /* Light gray background */
+`;
+
+const StyledInput = styled.input`
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+  background-color: #f5f5f5; /* Light gray background */
+
+  &:focus {
+    border-color: #3498db;
+  }
+`;
 
 const AddButton = styled.button`
   background-color: #539adb/* #4caf50 */;
@@ -35,31 +70,6 @@ const AddButton = styled.button`
     color: black;
     background-color:gray;
   }
-`;
-
-const DescriptionInput = styled.input`
-  flex-grow: 1;
-  padding: 8px;
-  font-size: 16px;
-  margin-bottom: 8px;
-  /* Remove border and box-shadow styles */
-  outline: none;
-  
-  border-color:lightgray;
-  border-radius: 4px;
-`;
-
-
-
-const DeadlineInput = styled.input`
-  padding: 12px;
-  font-size: 16px;
-  padding-left: 18px;
-  margin-bottom: 8px;
-  border: none;
-  outline: none;
-  box-shadow: none;
-  border-radius:4px ;
 `;
 const ColorInput = styled.input`
 appearance: none;
@@ -90,18 +100,6 @@ margin-left:25%;
 `;
 const StyledDiv = styled.div`
     margin:10px;
-`;
-const StyledInput = styled.input`
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s;
-
-  &:focus {
-    border-color: #3498db;
-  }
 `;
 const OptionalLabel = styled.label`
   font-size: 14px;

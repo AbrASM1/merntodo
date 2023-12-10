@@ -9,7 +9,7 @@ const TodoItemContainer = styled.div`
   margin-bottom: 8px;
   position: relative;
   padding: 16px;
-  border-radius: 25px 10px;
+  border-radius: 20px 10px 20px 20px;
   background-color: ${props => {
     return props.priority;
   }};
@@ -18,8 +18,8 @@ const TodoItemContainer = styled.div`
   opacity: ${props => (props.checked ? '0.75' : '1')};
   cursor: pointer;
   border: 2px solid transparent;
-  height: 17px; /* Set a fixed height */
-  transition: height 0.3s ease; /* Add a transition for a smooth effect */
+  height: 13px; 
+  transition: height 0.3s ease; 
 
   &:hover {
     height: 100%; /* Expand to 100% height on hover */
@@ -30,9 +30,9 @@ const Checkbox = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-
+  
   input {
-    margin: 0;
+    margin-bottom: 0;
     opacity: 0;
     cursor: pointer;
   }
@@ -141,17 +141,17 @@ function TodoItem({ todo, onToggle, onDelete, todoId, onUpdate }) {
   const [description, setDescription] = useState(todo.description);
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
-    onUpdate(todoId, todo.text, e.target.value, todo.deadline);
+    onUpdate(todoId, todo.text, e.target.value, todo.deadline,todo.time);
   };
   const [text, setText] = useState(todo.text);
   const handletextChange = (e) => {
     setText(e.target.value);
-    onUpdate(todoId, e.target.value, todo.description, todo.deadline);
+    onUpdate(todoId, e.target.value, todo.description, todo.deadline,todo.time);
   };
   const [deadline, setDeadline] = useState(todo.deadline);
   const handleDeadlineChange = (e) => {
     setDeadline(e.target.value);
-    onUpdate(todoId, todo.text, todo.description, e.target.value);
+    onUpdate(todoId, todo.text, todo.description, e.target.value,todo.time);
   };
   const [time, setTime] = useState(todo.time);
   

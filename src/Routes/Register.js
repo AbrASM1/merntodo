@@ -3,7 +3,8 @@ import {useNavigate} from "react-router-dom";
 
 import { CredentialsContext } from '../App';
 import styled from 'styled-components';
-import Image3 from '../icons/image3.avif';
+import Image7 from '../icons/image3.png';
+import Navbar from '../components/NavBar';
 
 
 const RegisterContainer = styled.div`
@@ -105,13 +106,24 @@ function Register() {
         password,
       }),
     })
-    .then(handleErrors)
-    .then(()=>{
+    //.then(handleErrors)
+    
+    .then((response) => {
+      return response.json();
+      //console.log(response.json())
+    })
+    .then((data)=>{
+      // console.log(data);
+      const token=data;
+      //console.log(token);
+      
+      localStorage.setItem("jwtToken", token);
+      //console.log(localStorage.getItem('jwtToken'))      
       setCredentials({
         username,
         password,  
       });
-      navigate("/");
+     navigate("/help");
     })
     .catch((error)=>{
       console.log("l'erreur:",error)
@@ -121,8 +133,10 @@ function Register() {
     const navigate = useNavigate();
 
   return (
+    <>
+    <Navbar/>
     <RegisterContainer>
-        <Image src={Image3}/>
+        <Image src={Image7}/>
     <FormContainer>
       <Heading>Register</Heading>
       {Error && <ErrorMessage>{Error}</ErrorMessage>}
@@ -134,7 +148,8 @@ function Register() {
       </Form>
       </FormContainer>
     </RegisterContainer>
-
+    </>
+    
   );
 }
 

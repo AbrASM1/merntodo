@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Image1 from '../icons/image1.png';
@@ -50,10 +50,36 @@ const Image = styled.img`
   height: 352px;
   margin-bottom: 20px;
 `;
+  
 function Home() {
 
-  const [credentials] = useContext(CredentialsContext);
+  const [credentials,setCredentials] = useContext(CredentialsContext);
+  useEffect(() => {
 
+    const storedToken = localStorage.getItem("jwtToken");
+  
+    if (storedToken) {
+      const parseJwtPayload = (token) => {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join("")
+        );
+      
+        return JSON.parse(jsonPayload);
+      };
+      
+      const decodedPayload = parseJwtPayload(storedToken);
+      setCredentials({
+        username:decodedPayload.username, 
+        password:decodedPayload.password,
+      });
+    }
+  }, []);
+  
   return (
     <>
 

@@ -8,7 +8,7 @@ import { handleErrors } from './Register';
 import styled from 'styled-components';
 
 import Image2 from '../icons/image2.jpg';
-
+import Navbar from '../components/NavBar';
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -97,13 +97,22 @@ function Login() {
         password,
       }),
     })
-    .then(handleErrors)
-    .then(()=>{
+    .then((response) => {
+      return response.json();
+      //console.log(response.json())
+    })
+    .then((data)=>{
+      // console.log(data);
+      const token=data;
+      //console.log(token);
+      
+      localStorage.setItem("jwtToken", token);
+      //console.log(localStorage.getItem('jwtToken'))      
       setCredentials({
         username,
         password,  
       });
-      navigate("/");
+     navigate("/");
     })
     .catch((error)=>{
       console.log("l'erreur:",error)
@@ -114,6 +123,8 @@ function Login() {
 
 
   return (
+    <>
+    <Navbar/>
     <LoginContainer>
         <Image src={Image2}/>
     <FormContainer>
@@ -138,6 +149,8 @@ function Login() {
         </Form>
       </FormContainer>
   </LoginContainer>
+  </>
+    
   );
 }
 
