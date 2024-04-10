@@ -4,6 +4,8 @@ const app = express();
 const port = 4000;
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt");
+
 mongoose.connect('mongodb://127.0.0.1:27017/todo')
     .then(() => {
         console.log('Connected to database');
@@ -48,41 +50,63 @@ app.post("/register", async (req, res) => {
             message: "User already exsits",
         });
         return;
-    }
-    await User.create({ username, password });
-    
-        const secretKey = 'test'; // Replace with your actual secret key
-        const payload = {
-          username: username,
-          password: password,
-        };
-      
-        // Generate a JWT
-        const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); // Set an expiration time
-        console.log('Generated Token:', token);
-    res.json(token);
+     }
+    //  bcrypt.hash(password, 10,async (err, hash) => {
+    //   if (err) {
+    //     console.error('Error hashing password:', err);
+    // } else {
+    //     console.log("THE HASH/"+hash+"/n");
+          await User.create({ username, password });
+          
+              const secretKey = 'test'; 
+              const payload = {
+                username: username,
+                password: password,
+              };
+            
+              // Generate a JWT
+              const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); 
+              console.log('Generated Token:', token);
+          res.json(token);
+        
+    //   }
+    // });
 });
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username }).exec();
+    // bcrypt.compare(password,user.password, (err, result) => {
+    //     if (err) {
+    //       console.error('Error comparing password:', err);
+    //     } else {
+    //       if (result) {
+    //         // Passwords match, proceed with logging in the user
+    //         // Generate and send a JWT token or set a session, etc.
+    //         res.status(200).json({ message: 'Login successful' });
+    //       } else {
+    //         // Passwords do not match, send an authentication failure response to the client
+    //         res.status(401).json({ error: 'Authentication failed' });
+    //       }
+    //     }
+    //   });
     if (!user || user.password !== password) {
         res.status(403);
         res.json({
             message: "invalid",
         });
         return;
-    }
-    const secretKey = 'test'; // Replace with your actual secret key
+    }else{
+    const secretKey = 'test'; 
     const payload = {
       username: username,
       password: password,
     };
   
     // Generate a JWT
-    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); // Set an expiration time
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); 
     console.log('Generated Token:', token);
     res.json(token);
-    
+}
 });
 
 app.post("/todos", async (req, res) => {

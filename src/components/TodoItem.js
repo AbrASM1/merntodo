@@ -18,7 +18,7 @@ const TodoItemContainer = styled.div`
   opacity: ${props => (props.checked ? '0.75' : '1')};
   cursor: pointer;
   border: 2px solid transparent;
-  height: 13px; 
+  height: 12px; 
   transition: height 0.3s ease; 
 
   &:hover {

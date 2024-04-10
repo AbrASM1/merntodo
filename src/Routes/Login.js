@@ -2,9 +2,6 @@ import React, { useState, useContext } from 'react';
 import {useNavigate} from "react-router-dom";
 
 import { CredentialsContext } from '../App';
-
-import { handleErrors } from './Register';
-
 import styled from 'styled-components';
 
 import Image2 from '../icons/image2.jpg';
@@ -73,6 +70,9 @@ const Image = styled.img`
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 
@@ -98,10 +98,18 @@ function Login() {
       }),
     })
     .then((response) => {
+      if (!response.ok){
+        //console.log(response)
+        const {message} = response.json();
+        console.log("message",message);
+        throw Error(message);
+      }else{
       return response.json();
-      //console.log(response.json())
+      }//console.log(response.json())
+      
     })
     .then((data)=>{
+      
       // console.log(data);
       const token=data;
       //console.log(token);

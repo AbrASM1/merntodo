@@ -71,7 +71,10 @@ const Image = styled.img`
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
-`;
+  @media (max-width: 768px) {
+    display: none;
+  }
+  `;
 
 
 
@@ -109,7 +112,14 @@ function Register() {
     //.then(handleErrors)
     
     .then((response) => {
-      return response.json();
+      if (!response.ok){
+      //console.log(response)
+      const {message} = response.json();
+      console.log("message",message);
+      throw Error(message);
+    }else{
+    return response.json();
+    }
       //console.log(response.json())
     })
     .then((data)=>{

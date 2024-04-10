@@ -33,8 +33,10 @@ function Todos() {
   }
 
   const handleDelete = (id) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this to-do?");
+    if(isConfirmed){
     setTodos(prevTodos => prevTodos.filter(todo => todo._id !== id));
-    LeDelete(id);
+    LeDelete(id);}
     //Fetcher();
 
   };
